@@ -1,0 +1,1790 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+}
+
+:root {
+  --bg-color: #151f28;
+  --main-color: #00abf0;
+  --accent-color: #006e9a;
+  --text-color: #333;
+  --second-text-color: #555;
+  --white-color: #fff;
+  --cover-color: linear-gradient(45deg, #00abf0, #006e9a);
+  --pages-color: linear-gradient(90deg, #fff, #ddd);
+  --border: 0.125rem solid #00abf0;
+  --box-shadow: 0 0 0.8rem rgba(0, 0, 0, 0.2);
+}
+
+body {
+  display: flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  overflow: auto;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  color: #222;
+}
+
+.wrapper {
+  position: relative;
+  width: 66rem;
+  height: 45rem;
+  padding: 2rem;
+  perspective: 250rem;
+  animation: show-animate 2s forwards;
+}
+
+@keyframes show-animate {
+
+  0%,
+  30% {
+    opacity: 0;
+    transform: rotate(-20deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotate(0deg);
+  }
+}
+
+.cover {
+  position: absolute;
+  top: 1.0%;
+  left: 0;
+  bottom: 1.0%;
+  width: 50%;
+  height: 95%;
+  background: linear-gradient(270deg, #1a2a42, #27496d, #3b6ca5, #1a2a42);
+  background-size: 100% 100%;
+  animation: subtleFlow 10s ease infinite;
+  box-shadow: 0 0 1.5rem rgba(59, 108, 165, 0.6), 0 0 2.5rem rgba(39, 73, 109, 0.4);
+  border-top-left-radius: 0.6rem;
+  border-bottom-left-radius: 0.6rem;
+  transform-origin: right;
+  border: 0.03rem solid rgba(255, 255, 255, 0.1);
+
+  /* Flexbox for bottom alignment */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /* pushes content to bottom */
+  padding: 1rem;
+  /* spacing inside */
+}
+
+
+/* Cover layering */
+.cover.cover-left {
+  z-index: -1;
+}
+
+.cover.cover-right {
+  z-index: 100;
+  transition: transform 3s cubic-bezier(.77, 0, .175, 1);
+}
+
+.cover.cover-right.turn {
+  transform: rotateY(180deg);
+}
+
+/* Subtle animated gradient */
+@keyframes subtleFlow {
+  0% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 1.5rem rgba(59, 108, 165, 0.6);
+  }
+
+  50% {
+    background-position: 100% 50%;
+    box-shadow: 0 0 2rem rgba(59, 108, 165, 0.5);
+  }
+
+  100% {
+    background-position: 0% 50%;
+    box-shadow: 0 0 1.5rem rgba(59, 108, 165, 0.6);
+  }
+}
+
+
+.book {
+  position: relative;
+  width: 100%;
+  height: 98%;
+  display: flex;
+  margin: auto;
+  perspective: 250rem;
+  background-color: #5e98ba;
+  /* Professional dark book cover */
+  border-radius: 0.5rem;
+  /* Optional: slightly rounded corners for modern look */
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.7);
+  /* Soft glow to make it stand out */
+}
+
+.book .book-page {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  background: var(--pages-color);
+  /* Keep original page color */
+  box-shadow: 0 0 .6rem rgba(0, 0, 0, 0.1);
+  display: flex;
+  padding: 1rem;
+
+  transform-origin: left;
+  /* For left page, use left; right page use right */
+  transform-style: preserve-3d;
+  transition: transform 5.8s cubic-bezier(.77, 0, .175, 0);
+}
+
+
+
+/* Project Info Box */
+.page-front .info-box {
+  background: #fff;
+  padding: 1rem 1rem 1rem 2.4rem;
+  /* thoda bottom padding vadhlay */
+  border-radius: 10px;
+  border-left: 4px solid #007bff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-left 0.3s ease;
+  max-width: 95%;
+  margin: auto;
+}
+
+/* Hover Effect */
+.page-front .info-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.25);
+  border-left: 4px solid #0056b3;
+}
+
+/* Number */
+.page-front .info-box::before {
+  counter-increment: project-counter;
+  content: counter(project-counter) ".";
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #007bff;
+  position: absolute;
+  left: 0.7rem;
+  top: 1rem;
+}
+
+/* Title */
+.page-front .info-title h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  /* spacing before Tech Used */
+  color: #007bff;
+  /* title color blue */
+  line-height: 1.3;
+}
+
+
+/* Tech Used Line */
+.page-front .info-box p:first-of-type {
+  margin-bottom: 0.6rem;
+  /* spacing before details */
+  color: #444;
+  font-weight: 500;
+}
+
+/* Highlight "Tech Used" text */
+.page-front .info-box p b {
+  color: #28a745;
+  /* green highlight */
+}
+
+
+/* Scrollbar फक्त add केले */
+.page-front .portfolio-box {
+  max-height: 70vh;
+  /* उंची limit केली */
+  overflow-y: auto;
+  /* vertical scroll allow */
+}
+
+/* Thin Scrollbar Style */
+.page-front .portfolio-box::-webkit-scrollbar {
+  width: 3px;
+}
+
+.page-front .portfolio-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.page-front .portfolio-box::-webkit-scrollbar-thumb {
+  background: #9bbde0;
+  border-radius: 10px;
+  line-height: 15px;
+}
+
+
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-page img {
+  max-width: 180px;
+  border-radius: 50%;
+  border: 0.25rem solid var(--main-color);
+  margin-bottom: .8rem;
+}
+
+.profile-page h1 {
+  font-size: 2.7rem;
+  line-height: 1;
+}
+
+.profile-page h3 {
+  color: var(--main-color);
+  font-size: 1.5rem;
+}
+
+.profile-page .social-media a {
+  display: inline-block;
+  font-size: 2rem;
+  color: #fbfafa;
+  transition: transform 0.9s ease, color 0.9s ease, box-shadow 0.9s ease;
+  animation: homeIconPulse 1s ease-in-out infinite;
+}
+
+/* Sequential bounce using nth-child  */
+.profile-page .social-media a:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.profile-page .social-media a:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.profile-page .social-media a:nth-child(3) {
+  animation-delay: 0.5;
+}
+
+.profile-page .social-media a:nth-child(4) {
+  animation-delay: 0.7;
+}
+
+.profile-page .social-media a:nth-child(5) {
+  animation-delay: 0.9;
+}
+
+/* Bounce animation */
+@keyframes homeIconPulse {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.profile-page .social-media a {
+  border-color: #000000;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  background: transparent;
+  border: var(--border);
+  border-radius: 100%;
+  font-size: 1.3rem;
+  color: var(--main-color);
+  margin: 0 .2rem;
+  transition: all .5s ease;
+  position: relative;
+  overflow: hidden;
+  margin-top:1.0%;
+}
+
+.topie{
+  margin-top: 1px;
+  padding-top: 10px;
+}
+.profile-page .social-media a:hover {
+  background-color: var(--main-color);
+  color: var(--white-color);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(225, 67, 167, 0.5);
+}
+
+/* Instagram specific styling */
+.profile-page .social-media a[href*="instagram"] {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  border: none;
+  color: white;
+}
+
+.profile-page .social-media a[href*="instagram"]:hover {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 0 20px rgba(252, 175, 69, 0.6);
+}
+
+/* TikTok specific styling */
+.profile-page .social-media a[href*="tiktok"] {
+  background: linear-gradient(45deg, #000000 0%, #ffffff 100%);
+  border: none;
+  color: white;
+  position: relative;
+}
+
+.profile-page .social-media a[href*="tiktok"]:hover {
+  background: linear-gradient(45deg, #000000 0%, #ffffff 100%);
+  transform: scale(1.1) rotate(-5deg);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.profile-page .social-media a[href*="tiktok"]::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(45deg, #ff0050, #00f2ea);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profile-page .social-media a[href*="tiktok"]:hover::before {
+  opacity: 1;
+}
+
+.profile-page p {
+  text-align: justify;
+  font-size: 1.1rem;
+}
+
+.profile-page .btn-box {
+  margin-top: 1.2rem;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 9.5rem;
+  height: 3rem;
+  background: var(--main-color);
+  border: var(--border);
+  border-radius: .3rem;
+  font-size: 1rem;
+  color: var(--white-color);
+  font-weight: 500;
+  margin: 0 1rem;
+  transition: .5s;
+}
+
+.btn-box .btn:nth-child(2) {
+  background: transparent;
+  color: var(--main-color);
+}
+
+.btn-box .btn:nth-child(1):hover {
+  background: transparent;
+  color: var(--main-color);
+}
+
+.btn-box .btn:nth-child(2):hover {
+  background: var(--main-color);
+  color: var(--white-color);
+}
+
+.book-page.page-right {
+  position: absolute;
+  right: 0;
+  transform-style: preserve-3d;
+  transform-origin: left;
+  transition: transform 1s cubic-bezier(.645, .045, .355, 1);
+}
+
+.book-page.page-right.turn {
+  transform: rotateY(-180deg);
+}
+
+.book-page .page-front,
+.book-page .page-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--pages-color);
+  padding: 1.5rem 2rem;
+}
+
+.book-page .page-front {
+  transform: rotateY(0deg) translateZ(1px);
+}
+
+.book-page .page-back {
+  transform: rotateY(180deg) translateZ(1px);
+}
+
+.title {
+  text-align: center;
+}
+
+.workeduc-box {
+  border-left: var(--border);
+  margin-top: 2rem;
+}
+
+.workeduc-box .workeduc-content {
+  position: relative;
+  padding-left: 1.6rem;
+  padding-bottom: 1.2rem;
+}
+
+.workeduc-box .workeduc-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -0.65rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background: var(--main-color);
+}
+
+.workeduc-content .year {
+  color: var(--main-color);
+  font-size: 1.2rem;
+}
+
+.workeduc-content h3 {
+  font-size: 1.4rem;
+  margin: .3rem 0;
+}
+
+.workeduc-content p {
+  font-size: 1.15rem;
+  text-align: justify;
+}
+
+.workeduc-content .year i {
+  margin-right: .4rem;
+  font-size: 1.2rem;
+}
+
+.number-page {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 600;
+}
+
+.nextprev-btn {
+  position: absolute;
+  bottom: .9rem;
+  right: 1.5rem;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  font-size: 2rem;
+  color: var(--second-text-color);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: .5s;
+}
+
+.nextprev-btn:hover {
+  color: var(--main-color);
+}
+
+.nextprev-btn.back {
+  left: 1.5rem;
+}
+
+.services-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.services-box .services-content {
+  flex: 1 1 10rem;
+  border: var(--border);
+  border-radius: .5rem;
+  padding: .8rem .5rem 1.1rem;
+  text-align: center;
+  transition: .3s ease;
+}
+
+.services-box .services-content:hover {
+  box-shadow: var(--box-shadow);
+}
+
+.services-content i {
+  font-size: 2.5rem;
+  color: var(--main-color);
+}
+
+.services-content h3 {
+  font-size: 1.1rem;
+}
+
+.services-content p {
+  margin: .2rem 0 .8rem;
+}
+
+.services-content .btn {
+  width: 8rem;
+  height: 2.5rem;
+}
+
+.services-content .btn:hover {
+  background-color: transparent;
+  color: var(--main-color);
+}
+
+.skills-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: flex-start;
+}
+
+.skills-box .skills-content {
+  min-width: 220px;
+}
+
+.skills-content h3 {
+  font-size: 1.2rem;
+  margin-bottom: .6rem;
+  color: var(--main-color);
+  font-weight: 600;
+}
+
+.skills-content .content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+}
+
+.skills-content .content span {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 3.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: .5rem;
+  background: linear-gradient(135deg, #f9fafb, #f3f4f6);
+  color: var(--text-color);
+  border: 1.2px solid #e5e7eb;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.skills-content .content span::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 171, 240, 0.2), transparent);
+  transition: left 0.5s ease;
+  z-index: 1;
+}
+
+.skills-content .content span:hover::before {
+  left: 100%;
+}
+
+.skills-content .content span i {
+  color: var(--main-color);
+  font-size: 1.6rem;
+  margin-bottom: .3rem;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 2;
+  position: relative;
+}
+
+.skills-content .content span:hover i {
+  transform: scale(1.2) rotate(5deg);
+  color: #0086c4;
+  text-shadow: 0 0 10px rgba(0, 171, 240, 0.5);
+}
+
+.skills-content .content span:hover {
+  background: linear-gradient(135deg, #dbeafe, #ede9fe);
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(0, 171, 240, 0.25), 0 0 20px rgba(0, 171, 240, 0.1);
+  border-color: var(--main-color);
+}
+
+/* Add sparkle effect on hover */
+.skills-content .content span::after {
+  content: '✨';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 3;
+}
+
+.skills-content .content span:hover::after {
+  opacity: 1;
+  transform: rotate(15deg) scale(1.2);
+}
+
+.portfolio-box {
+  margin-top: 2rem;
+}
+
+.portfolio-box .img-box {
+  display: flex;
+  width: 100%;
+  height: 15rem;
+  border-radius: .5rem;
+  border: var(--border);
+  overflow: hidden;
+}
+
+.portfolio-box .img-box img {
+  width: 100%;
+  object-fit: cover;
+  transition: .5s ease;
+}
+
+.portfolio-box .img-box:hover img {
+  transform: scale(1.1);
+}
+
+.portfolio-box .info-box {
+  margin: 1rem 0 1.5rem;
+}
+
+.portfolio-box .info-box .info-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.portfolio-box .info-box .info-title h3 {
+  font-size: 1.3rem;
+}
+
+.portfolio-box .info-box .info-title a {
+  display: flex;
+  align-items: center;
+  color: var(--main-color);
+}
+
+.portfolio-box .info-box .info-title a i {
+  margin-left: .3rem;
+}
+
+.portfolio-box .info-box p:nth-of-type(1) {
+  font-weight: 600;
+}
+
+.portfolio-box .info-box p {
+  text-align: justify;
+}
+
+.portfolio-box .btn-box {
+  display: flex;
+  justify-content: center;
+}
+
+.portfolio-box .btn-box .btn {
+  margin: 0 1 .15rem;
+}
+
+.btn-box {
+  display: flex;
+  justify-content: center;
+  /* Center horizontally */
+  gap: 15px;
+  /* Spacing between buttons */
+  flex-wrap: wrap;
+  /* Allow wrapping on smaller screens */
+  margin-top: 20px;
+}
+
+.btn-box .btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  text-align: center;
+  white-space: nowrap;
+  /* Prevent text breaking */
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .btn-box {
+    gap: 10px;
+    /* Reduce spacing on small screens */
+  }
+
+  .btn-box .btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+
+.thank-you-box {
+  background: linear-gradient(270deg, #1a2a42, #27496d, #3b6ca5, #1a2a42);
+  background-size: 400% 400%;
+  animation: subtleFlow 10s ease infinite;
+  box-shadow: 0 0 1.5rem rgba(59, 108, 165, 0.6), 0 0 2.5rem rgba(39, 73, 109, 0.4);
+  border-radius: 0.6rem;
+  padding: 2rem;
+  color: white;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.thank-you-box h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.thank-you-box p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.thank-you-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.thank-you-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: white;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.thank-you-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: white;
+  transform: scale(1.1);
+  color: #00abf0;
+}
+
+.contact-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.contact-wrapper .contact-box {
+  flex: 1;
+}
+
+.contact-wrapper .thank-you-box {
+  flex: 1;
+  max-width: 45%;
+  background: linear-gradient(270deg, #1a2a42, #27496d, #3b6ca5, #1a2a42);
+  box-shadow: 0 0 1.5rem rgba(59, 108, 165, 0.6), 0 0 2.5rem rgba(39, 73, 109, 0.4);
+  border-radius: 0.6rem;
+  padding: 2rem;
+  color: white;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.contact-box {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.contact-box p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  color: rgb(38, 38, 183);
+}
+
+.contact-box p a {
+  color: var(--main-color);
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.contact-box p a:hover {
+  color: var(--accent-color);
+}
+
+.contact-box form {
+  margin-top: 1.5rem;
+}
+
+.contact-box .field {
+  width: 100%;
+  background: linear-gradient(135deg, #f9fafb, #f3f4f6);
+  border: var(--border);
+  border-radius: .4rem;
+  padding: .8rem 1rem;
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.contact-box .field:focus {
+  border-color: var(--main-color);
+  background: linear-gradient(135deg, #eef2ff, #e0f2fe);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+.contact-box textarea {
+  resize: none;
+  height: 10rem;
+}
+
+.contact-box .btn {
+  width: 100%;
+  max-width: 200px;
+  background: linear-gradient(135deg, var(--main-color), var(--accent-color));
+  border: 2px solid var(--main-color);
+  border-radius: .4rem;
+  padding: .8rem 1.2rem;
+  font-size: 1rem;
+  color: whitesmoke;
+  font-weight: 600;
+  transition: all .4s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-box .btn:hover {
+  background: linear-gradient(135deg, var(--main-color), var(--accent-color));
+  border: 2px solid var(--main-color);
+  color: rgb(3, 8, 16);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+.home-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: var(--main-color);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.phone-btn:hover {
+  background: var(--accent-color);
+  transform: scale(1.1);
+}
+
+.back-profile {
+  position: absolute;
+  bottom: 1.2rem;
+  right: 2rem;
+  width: 2rem;
+  height: 2rem;
+  background-color: transparent;
+  border: var(--border);
+  border-radius: .3rem;
+  font-size: 1.1rem;
+  color: var(--main-color);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: .5s;
+}
+
+.back-profile:hover {
+  background: var(--main-color);
+  color: var(--white-color);
+}
+
+.back-profile p {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) scale(.5);
+  font-size: 1rem;
+  opacity: 0;
+  transition: .5s;
+  color: var(--main-color);
+}
+
+.back-profile:hover p {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  top: -1.8rem;
+}
+
+.certifications-box {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.cert-card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cert-card i {
+  font-size: 2rem;
+  color: #0077b6;
+  margin-bottom: 0.5rem;
+}
+
+.cert-card h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+
+.cert-card p {
+  font-size: 12px;
+  color: #555;
+}
+
+.cert-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.certifications-section .container,
+.certifications-section .container-fluid {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.certifications-section .row {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Work Experience Container */
+.wrd-container {
+  display: block;
+  max-height: 78vh;
+  overflow-y: auto;
+  /* ✅ allow scroll */
+  padding: 1rem 1.5rem;
+  margin-top: 0.5rem;
+  background: #f5f7fa;
+  border-radius: 8px;
+  box-sizing: border-box;
+
+  /* Smooth scrolling for mobile */
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+
+  /* ✅ Desktop support */
+  scrollbar-width: thin;
+  /* Firefox */
+  -ms-overflow-style: scrollbar;
+  /* IE/Edge */
+  touch-action: auto;
+  /* enable all gestures */
+}
+
+/* ✅ Scrollbar visible but styled thin (Chrome, Safari, Edge) */
+.wrd-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.wrd-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 171, 240, 0.7);
+  border-radius: 4px;
+}
+
+.wrd-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 171, 240, 1);
+}
+
+.wrd-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Experience Card */
+.wrd-card {
+  background: #ffffff;
+  padding: 1rem 1.5rem;
+  border-left: 3px solid #00abf0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  margin-bottom: 0.8rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wrd-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+/* Text & Typography */
+.wrd-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.wrd-year {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.wrd-year i {
+  color: #00abf0;
+}
+
+.wrd-role {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #00abf0;
+}
+
+.wrd-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #070d0f;
+  margin-bottom: 1rem;
+}
+
+.wrd-desc br {
+  margin-bottom: 0.5rem;
+}
+
+/* Optional: Company Name */
+.company-name {
+  color: #28a745;
+}
+
+
+/* home icon 6 page  */
+
+.homee-btn {
+  position: absolute;
+  bottom: 20px;
+  /* space from bottom */
+  right: 20px;
+  /* space from right */
+  font-size: 28px;
+  color: #00abf0;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  animation: homeIconPulse 2s ease-in-out infinite;
+  z-index: 1000;
+}
+
+.homee-btn:hover {
+  transform: scale(1.3) rotate(10deg);
+  color: #0086c4;
+  box-shadow: 0 0 20px rgba(0, 171, 240, 0.6);
+  animation: homeIconBounce 0.6s ease-in-out;
+}
+
+/* Pulse animation for home icon */
+@keyframes homeIconPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 171, 240, 0.7);
+  }
+
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 10px rgba(0, 171, 240, 0);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 171, 240, 0);
+  }
+}
+
+/* Bounce animation on hover */
+@keyframes homeIconBounce {
+
+  0%,
+  20%,
+  53%,
+  80%,
+  100% {
+    transform: scale(1.3) rotate(10deg);
+  }
+
+  40%,
+  43% {
+    transform: scale(1.4) rotate(15deg);
+  }
+
+  70% {
+    transform: scale(1.35) rotate(12deg);
+  }
+
+  90% {
+    transform: scale(1.32) rotate(11deg);
+  }
+}
+
+
+
+.intro-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* Full screen */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at center, #0d0d1a 0%, #050510 100%);
+  color: #100e0e;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Heading */
+.intro-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  z-index: 2;
+  color: #e0e7ff;
+  /* Soft off-white, readable on dark bg */
+}
+
+.intro-text span {
+  color: #90caf9;
+  /* Subtle blue accent for emphasis */
+}
+
+
+/* Typing effect */
+.typing {
+  font-size: 1.2rem;
+  margin-top: 0.8rem;
+  color: #bbb;
+  z-index: 2;
+  animation: blink 1.2s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Button */
+.open-btn {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.6rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  background: linear-gradient(45deg, #95c3cc, #ff4dff);
+  color: #2e1e1e;
+  cursor: pointer;
+  z-index: 2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.open-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(26, 129, 150, 0.6);
+}
+
+/* Canvas BG */
+#network-bg {
+  position: fixed;
+  background-color: #000000;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .intro-text {
+    font-size: 2rem;
+  }
+
+  .typing {
+    font-size: 1rem;
+  }
+
+  .open-btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .intro-section {
+    background: #222;
+    /* light black background for mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .intro-text {
+    font-size: 1.6rem;
+  }
+
+  .typing {
+    font-size: 0.9rem;
+  }
+
+  .open-btn {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+
+/* Open Book Button */
+.open-btn {
+  margin-top: 2rem;
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  background: linear-gradient(45deg, #00f7ff, #007bff);
+  color: rgb(30, 18, 18);
+  box-shadow: 0 4px 15px rgba(0, 247, 255, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.open-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 25px rgba(0, 247, 255, 0.8);
+}
+
+
+
+
+/* Video iframe styling */
+iframe {
+  width: 100%;
+  max-width: 560px;
+  height: 315px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 1rem auto;
+  display: block;
+}
+
+/* Responsive iframe */
+@media (max-width: 768px) {
+  iframe {
+    max-width: 100%;
+    height: 250px;
+  }
+}
+
+@media (max-width: 480px) {
+  iframe {
+    height: 200px;
+  }
+}
+
+/* ================= MOBILE & TABLET RESPONSIVE ================= */
+
+
+
+
+
+
+@media (max-width: 1024px) {
+  body {
+    overflow-x: hidden;
+    font-size: 12px;
+    display: block;
+    /* vertical layout */
+  }
+
+  .wrapper {
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 0.5rem;
+  }
+
+  /* Hide book cover */
+  .cover {
+    display: none !important;
+  }
+
+  /* Book container scroll mode */
+  .book {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    perspective: none !important;
+  }
+
+  /* Force every book page to block */
+  .book-page,
+  .book-page.page-left,
+  .book-page.page-right {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 0 20px 0 !important;
+    padding: 1rem !important;
+    box-shadow: none !important;
+    transform: none !important;
+    left: 0 !important;
+    top: 0 !important;
+  }
+
+  /* Page content reset */
+  .page-front,
+  .page-back {
+    position: relative !important;
+    transform: none !important;
+    width: 100% !important;
+    height: auto !important;
+    padding: 1rem !important;
+  }
+
+  /* Sections stack */
+  section {
+    width: 100% !important;
+    margin: 20px 0 !important;
+    display: block !important;
+  }
+
+  /* Profile page responsive */
+  .profile-page img {
+    max-width: 120px;
+  }
+
+  .profile-page h1 {
+    font-size: 1.6rem;
+  }
+
+  .profile-page h3 {
+    font-size: 1.1rem;
+  }
+
+  /* Skills & Services stack */
+  .skills-box,
+  .services-box {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  /* Portfolio images resize */
+  .portfolio-box .img-box {
+    height: 10rem;
+  }
+
+  /* Contact form */
+  .contact-box .field,
+  .contact-box textarea {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .contact-box .btn {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.6rem 1rem;
+  }
+
+  /* Nav buttons inline */
+  .nextprev-btn,
+  .back-profile {
+    position: relative !important;
+    margin-top: 0.5rem;
+  }
+
+  /* Fix scrolling in wrd-container on desktop */
+  .wrd-container {
+    max-height: calc(100% - 2rem);
+    overflow-y: auto;
+  }
+
+  /* Fix skills box stretching */
+  .profile-page .skills-box {
+    align-items: flex-start;
+  }
+
+  @media (max-width: 1024px) {
+
+    html,
+    body {
+      overflow-x: hidden !important;
+      /* horizontal band */
+      overflow-y: auto !important;
+      /* vertical scroll allow */
+      height: auto !important;
+      /* natural height */
+    }
+
+    .wrapper {
+      height: auto !important;
+      overflow: visible !important;
+      /* wrapper scroll block karu naye */
+    }
+
+    .book {
+      height: auto !important;
+      overflow: visible !important;
+      /* content free scroll hoil */
+    }
+
+    .book-page {
+      overflow: visible !important;
+      /* page madhla content cut hou naye */
+    }
+  }
+
+  @media (max-width: 1024px) {
+
+    /* hide book navigation & page numbers */
+    .nextprev-btn,
+    .number-page {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 1024px) {
+
+    /* Welcome section styling */
+    .welcome-section {
+      display: block;
+      text-align: center;
+      padding: 2rem 1rem;
+      background: linear-gradient(135deg, #00abf0, #006e9a);
+      color: white;
+      border-radius: 0 0 20px 20px;
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .welcome-section h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .welcome-section p {
+      font-size: 1rem;
+      line-height: 1.4;
+      margin: 0 1rem;
+    }
+
+    .welcome-section img {
+      max-width: 120px;
+      border-radius: 50%;
+      border: 3px solid #00abf0;
+      box-shadow: 0 0 15px 5px rgba(0, 171, 240, 0.7);
+      object-fit: cover;
+    }
+
+    /* Education & Experience separation */
+    /* .education-section,
+    .experience-section {
+        display: block;
+        padding: 1.5rem 1rem;
+        margin-bottom: 1.5rem;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .education-section h2,
+    .experience-section h2 {
+        font-size: 1.4rem;
+        color: var(--main-color);
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    /* Scroll effect for experience and project sections */
+    /* .fade-in-mobile {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+    } */
+
+    /* .fade-in-mobile.visible {
+        opacity: 1;
+        transform: translateY(0);
+    } */
+
+    /* Scroll progress bar for experience and project sections */
+    /* .wrd-container, .portfolio-box {
+        position: relative; */
+  }
+
+  .scroll-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(to right, #00abf0, #006e9a);
+    width: 0%;
+    transition: width 0.1s ease;
+
+  }
+}
+
+
+
+
+
+
+/* ==== Scroll for Projects & Experience (Desktop & Mobile) ==== */
+
+
+
+/* Mobile-only: polished custom scrollbar + snap for Projects & Experience */
+@media (max-width: 1024px) {
+  .custom-scrollbar {
+    max-height: 75vh;
+    /* limit height so scroll appears */
+    overflow-y: auto !important;
+    /* enable vertical scrolling */
+    scroll-snap-type: y mandatory;
+    /* one-by-one snap */
+    -webkit-overflow-scrolling: touch;
+    /* smooth on iOS */
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    /* avoid layout shift when scrollbar appears */
+    padding-right: 6px;
+    /* space for visible scrollbar */
+  }
+
+  /* Make the children snap to start (adjust selectors to real children if needed) */
+  .custom-scrollbar>* {
+    scroll-snap-align: start;
+  }
+
+  /* If your cards are .wrd-card and .info-box, ensure they align */
+  .custom-scrollbar .wrd-card,
+  .custom-scrollbar .info-box {
+    scroll-snap-align: start;
+  }
+
+  /* Remove outer side line (left border) from project cards in mobile view */
+  .wrd-card {
+    border-left: none;
+  }
+
+  /* WebKit-based browsers (Chrome, Safari, Edge) */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.15);
+    /* visible track line */
+    border-radius: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #00abf0;
+    /* neon thumb */
+    border-radius: 8px;
+    border: 2px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #00d6ff;
+  }
+
+  /* Firefox */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #00abf0 rgba(0, 0, 0, 0.15);
+  }
+}
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+  .portfolio-box.custom-scrollbar {
+    max-height: 400px;
+    /* adjust height as needed */
+    overflow-y: auto;
+    /* enable vertical scroll */
+    overflow-x: hidden;
+    /* prevent horizontal scroll */
+  }
+
+  /* Styled scrollbar (Chrome, Edge, Safari) */
+  .portfolio-box.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .portfolio-box.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #00abf0;
+    border-radius: 3px;
+  }
+
+  .portfolio-box.custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Styled scrollbar (Firefox) */
+  .portfolio-box.custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #00abf0 transparent;
+  }
+}
+
+
+/* ================= MOBILE SCROLL FIX ================= */
+@media (max-width: 1024px) {
+
+  /* Projects and Work Experience containers */
+  .portfolio-box,
+  .wrd-container {
+    max-height: 65vh;
+    /* limit height inside page */
+    overflow-y: auto;
+    /* vertical scroll only */
+    overflow-x: hidden;
+    /* disable horizontal scroll */
+    -webkit-overflow-scrolling: touch;
+    /* smooth scroll on iOS */
+    scrollbar-width: thin;
+    /* Firefox */
+    scrollbar-color: #00abf0 transparent;
+  }
+
+  /* Chrome, Edge, Safari scroll styling */
+  .portfolio-box::-webkit-scrollbar,
+  .wrd-container::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  .portfolio-box::-webkit-scrollbar-track,
+  .wrd-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .portfolio-box::-webkit-scrollbar-thumb,
+  .wrd-container::-webkit-scrollbar-thumb {
+    background: #00abf0;
+    border-radius: 10px;
+  }
+}
+
+/* Desktop Scrolling Styles for Projects & Experience */
+@media (min-width: 1025px) {
+
+  .wrd-container,
+  .portfolio-box {
+    max-height: 65vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #00abf0 transparent;
+  }
+
+  /* Override the hidden scrollbar styles for desktop */
+  .wrd-container::-webkit-scrollbar,
+  .portfolio-box::-webkit-scrollbar {
+    display: block;
+    width: 8px;
+  }
+
+  .wrd-container::-webkit-scrollbar-track,
+  .portfolio-box::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+
+  .wrd-container::-webkit-scrollbar-thumb,
+  .portfolio-box::-webkit-scrollbar-thumb {
+    background: #00abf0;
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .wrd-container::-webkit-scrollbar-thumb:hover,
+  .portfolio-box::-webkit-scrollbar-thumb:hover {
+    background: #00d6ff;
+  }
+}

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akshay Dandwate - 3D Portfolio Resume</title>
+
+  <!-- BoxIcon -->
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <!-- style -->
+  <link rel="stylesheet" href="style.css" />
+<style>
+  
+  /* ================= Preloader Styles ================= */
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #01010f, #000000, #01040e);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* ================= Profile Container ================= */
+.brain-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  width: 100%;
+  height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* ================= Profile Image ================= */
+.profile-img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 20%;
+  border: 4px solid #00abf0;
+  box-shadow: 0 0 15px 5px rgba(0, 123, 255, 0.7);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ================= Loading Text ================= */
+.loading-text {
+  margin-top: 1rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.4;
+  max-width: 90%;
+  background: linear-gradient(90deg, #db6e5e, #87c2f2, #6d95de, #be5d52);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 2s ease-in-out infinite, fadeIn 1s infinite alternate;
+}
+
+.loading-text b {
+  display: block;
+  font-size: 1.2em;
+}
+
+.loading-text span {
+  display: block;
+  font-size: 1rem;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ================= Progress Bar ================= */
+.progress-bar {
+  margin-top: 1.2rem;
+  width: 80%;
+  max-width: 400px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #1e5096, #2f6ea2, #6d95de, #be5d52);
+  border-radius: 6px;
+  animation: loadFill 5.2s forwards;
+}
+
+@keyframes loadFill {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* ================= Bubble Effects ================= */
+.bubble-container-preloader {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bubble-preloader {
+  position: absolute;
+  bottom: -50px;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: rise-preloader 6s infinite ease-in-out;
+}
+
+/* Random bubble sizes & colors */
+.bubble-preloader:nth-child(1) { left: 10%; width: 10px; height: 10px; background: rgba(255, 215, 0, 0.6); animation-duration: 5s; }
+.bubble-preloader:nth-child(2) { left: 25%; width: 14px; height: 14px; background: rgba(77, 182, 172, 0.6); animation-duration: 7s; }
+.bubble-preloader:nth-child(3) { left: 40%; width: 8px;  height: 8px;  background: rgba(255, 111, 97, 0.6); animation-duration: 6s; }
+.bubble-preloader:nth-child(4) { left: 60%; width: 12px; height: 12px; background: rgba(173, 216, 230, 0.6); animation-duration: 8s; }
+.bubble-preloader:nth-child(5) { left: 80%; width: 14px; height: 14px; background: rgba(255, 255, 255, 0.5); animation-duration: 5.5s; }
+/* Add more as needed */
+
+@keyframes rise-preloader {
+  0%   { transform: translateY(0) scale(0.5); opacity: 0; }
+  10%  { opacity: 0.4; }
+  50%  { opacity: 0.6; }
+  100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+}
+
+/* ================= Responsive ================= */
+@media (max-width: 768px) {
+  .profile-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .loading-text {
+    font-size: 1.1rem;
+  }
+
+  .progress-bar {
+    width: 90%;
+    height: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .loading-text {
+    font-size: 1rem;
+  }
+
+  .progress-bar {
+    width: 85%;
+    height: 5px;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="brain-container">
+      <img src="./122.jpg" alt="Akshay Dandwate Profile Photo" class="profile-img"
+        style="object-position: center 20%;" />
+      <div class="loading-text"><b>Hi, I’m Akshay 🌐 – Let’s Explore My Portfolio!
+        </b></div>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </div>
+    <div class="bubble-container-preloader">
+      <div class="bubble-preloader"></div>
+      <div class="bubble-preloader"></div>
+      <div class="bubble-preloader"></div>
+      <div class="bubble-preloader"></div>
+      <div class="bubble-preloader"></div>
+      <div class="bubble-preloader"></div>
+      <div class="bubble-preloader"></div>
+      <div class="bubble-preloader"></div>
+      <div class="bubble-preloader"></div>
+      <div class="bubble-preloader"></div>
+      <div class="bubble-preloader"></div>
+      <div class="bubble-preloader"></div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main-content" style="display: none;">
+
+    <!-- ====== Intro Section ====== -->
+    <div class="intro-section" id="intro">
+      <h1 class="intro-text">Welcome to <span>Akshay's Portfolio</span></h1> <!-- No spelling error found here -->
+      <p class="typing">Creativity Meets Technology</p> <!-- No spelling error found here -->
+      <button class="open-btn" onclick="openBook()">📖 Click TO Open Portfolio</button>
+      <!-- No spelling error found here -->
+      <canvas id="network-bg"></canvas>
+    </div>
+
+    <!-- ====== Book Wrapper ====== -->
+    <div class="wrapper" id="book-wrapper" style="display: none;">
+      <!-- ... All pages 1 to 7 remain exactly the same as your original code ... -->
+      <div class="cover cover-left"></div>
+      <div class="cover cover-right"></div>
+
+      <div class="book">
+        <!-- Page 1 (Profile) -->
+        <div class="book-page page-left">
+          <div class="profile-page">
+            <img src="./122.jpg" alt="Akshay Dandwate Profile Photo" />
+            <h1>Akshay Dandwate</h1>
+            <h3>Full Stack Developer</h3>
+
+            <div class="social-media">
+              <a href="mailto:dandwateakshay77@gmail.com"><i class="bx bx-envelope"></i></a>
+              <a href="tel:+919158559339"><i class="bx bx-phone"></i></a>
+              <a href="https://www.linkedin.com/in/akshay-dandvate77" target="_blank"><i
+                  class="bx bxl-linkedin-square"></i></a>
+              <a href="https://github.com/" target="_blank"><i class="bx bxl-github"></i></a>
+              
+            </div>
+
+            <p class="topie">
+              Motivated Full Stack Developer skilled in Java, Spring Boot,
+              ReactJS, and MySQL. Experienced in building scalable web apps
+              through internships and live projects. Seeking to contribute in
+              a
+              growth-driven IT team with a focus on backend development and
+              performance optimization.
+            </p>
+
+            <div class="btn-box">
+              <a href="Akshay_resume63.pdf" class="btn" download>Download
+                CV</a>
+              <a href="#" class="btn contact-me">Contact Me!</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page 2 & 3 -->
+        <div class="book-page page-right turn" id="turn-1">
+          <!-- Page 2: Work Experience -->
+          <div class="page-front">
+            <h1 class="wrd-title">Work Experience</h1>
+            <div class="wrd-container">
+
+              <div class="wrd-card">
+                <span class="wrd-year"><i class="bx bxs-calendar"></i> Feb
+                  2025 – Mar 2025</span>
+                <h3 class="wrd-role">React Developer Intern - <span class="company-name">Auto Mart Pvt. Ltd</span></h3>
+                <p class="wrd-desc">
+                  • Developed and maintained responsive user interfaces using
+                  React.js, ensuring seamless performance across devices and
+                  browsers while implementing design updates aligned with
+                  brand guidelines and user feedback.<br>
+                  • Led front-end improvements on the company website,
+                  collaborating with designers and backend developers to
+                  integrate new features, optimize page load speed, and
+                  enhance overall user experience.
+                </p>
+              </div>
+
+              <div class="wrd-card">
+                <span class="wrd-year"><i class="bx bxs-calendar"></i> Feb
+                  2023 – Mar 2023</span>
+                <h3 class="wrd-role">Web Developer Intern - <span class="company-name"> Paarsh Infotech</span></h3>
+                <p class="wrd-desc">
+                  • Developed a comprehensive Dental Hospital Management
+                  System using JavaScript, Bootstrap, HTML, CSS, and Tailwind
+                  to enhance user experience and streamline hospital
+                  operations.<br>
+                  • Designed and integrated real-time features like patient
+                  registration, appointment scheduling, and billing, improving
+                  overall system efficiency.
+                </p>
+              </div>
+
+              <div class="wrd-card">
+                <span class="wrd-year"><i class="bx bxs-calendar"></i> Oct
+                  2023 – Dec 2023</span>
+                <h3 class="wrd-role">Full Stack Intern - <span class="company-name">OctaNet Software</span></h3>
+                <p class="wrd-desc">
+                  • Developed and maintained both front-end and back-end
+                  components of web applications using Java and JavaScript,
+                  enhancing functionality and ensuring seamless user
+                  interaction.<br>
+                  • Designed responsive user interfaces with HTML, CSS, and
+                  JavaScript, integrating them with Java-based back-end
+                  services for smooth user experience.<br>
+                  • Optimized and debugged existing code, improving
+                  performance and resolving issues to enhance application
+                  efficiency and meet client requirements.
+                </p>
+              </div>
+
+            </div>
+
+            <span class="number-page">1</span>
+            <span class="nextprev-btn" data-page="turn-1"><i class="bx bx-chevron-right"></i></span>
+          </div>
+
+          <!-- Page 3: Education -->
+          <div class="page-back">
+            <h1 class="title">Education</h1>
+            <div class="workeduc-box">
+              <div class="workeduc-content">
+                <span class="year"><i class="bx bxs-calendar"></i> 2020 -
+                  2024</span>
+                <h3> Bachelor of Engineering (B.E) - Computer Engineering</h3>
+                <p>Guru Gobind Singh College of engineering & research Centre,
+                  Nashik</p>
+              </div>
+              <div class="workeduc-content">
+                <span class="year"><i class="bx bxs-calendar"></i> 2018 -
+                  2020</span>
+                <h3>Higher Secondary Certificate (HSC) </h3>
+                <p>MVPS Cidco College, Nashik</p>
+              </div>
+              <div class="workeduc-content">
+                <span class="year"><i class="bx bxs-calendar"></i> 2018</span>
+                <h3>Secondary School Certificate (SSC) </h3>
+                <p>T. J. Chauhan Swami Vivekanand High School Nashik</p>
+              </div>
+            </div>
+            <span class="number-page">2</span>
+            <span class="nextprev-btn back" data-page="turn-1"><i class="bx bx-chevron-left"></i></span>
+          </div>
+        </div>
+
+        <!-- Page 4 & 5 -->
+        <div class="book-page page-right turn" id="turn-2">
+          <!-- Page 4: Skills -->
+          <div class="page-front">
+            <h1 class="title">Technical Skills</h1>
+            <div class="skills-box">
+              <!-- Programming -->
+              <div class="skills-content">
+                <h3>Programming</h3>
+                <div class="content">
+                       <span style="--i:0"><i class='bx bxl-java'></i>Java</span>
+                  <span style="--i:1"><i class='bx bx-leaf'></i>Spring Boot</span> <!-- leaf icon used -->
+                  <span style="--i:2"><i class='bx bxl-c-plus-plus'></i>C++</span>
+                  <span style="--i:3"><i class='bx bx-code'></i>C</span> <!-- generic code icon -->
+                  <span style="--i:4"><i class='bx bx-data'></i>REST API</span>
+                  <span style="--i:5"><i class='bx bxl-mysql'></i>MySQL</span>
+                </div>
+              </div>
+
+              <!-- Web Technologies -->
+              <div class="skills-content">
+                <h3>Web Technologies</h3>
+                <div class="content">
+                    <span style="--i:6"><i class='bx bxl-html5'></i>HTML5</span>
+                  <span style="--i:7"><i class='bx bxl-css3'></i>CSS3</span>
+                  <span style="--i:8"><i class='bx bxl-javascript'></i>JavaScript</span>
+                  <span style="--i:9"><i class='bx bxl-react'></i>ReactJS</span>
+                  <span style="--i:10"><i class='bx bxl-bootstrap'></i>Bootstrap</span>
+                  <span style="--i:11"><i class='bx bxl-tailwind-css'></i>Tailwind</span>
+                  <!-- data symbol -->
+                </div>
+              </div>
+
+              <!-- Tools & Platforms -->
+              <div class="skills-content">
+                <h3>Tools & Platforms</h3>
+                <div class="content">
+                      <span style="--i:12"><i class='bx bxl-git'></i>Git</span>
+                  <span style="--i:13"><i class='bx bxl-github'></i>GitHub</span>
+                  <span style="--i:14"><i class='bx bxl-docker'></i>Docker</span>
+                  <span style="--i:15"><i class='bx bxl-aws'></i>AWS</span>
+
+                 <span style="--i:16"><i class='bx bxl-jira'></i>Jira</span>
+                  <!-- <span><i class='bx bx-terminal'></i>VS Code</span> -->
+                </div>
+              </div>
+            </div>
+
+            <span class="number-page">3</span>
+            <span class="nextprev-btn" data-page="turn-2"><i class="bx bx-chevron-right"></i></span>
+          </div>
+
+          <!-- Page 5: Certifications -->
+          <div class="page-back">
+            <h1 class="title">Certifications</h1>
+            <div class="workeduc-box">
+              <div class="workeduc-content">
+                <p>Java full stack development And
+                  Software Testings. (TechnoSignia)</p>
+              </div>
+              <div class="workeduc-content">
+                <p>Cybersecurity Analyst Job
+                  Simulation. (Tata Group)</p>
+              </div>
+              <div class="workeduc-content">
+                <p>AWS Academy Machine Learning
+                  Foundations / Cloud Architecting / Cloud foundation. (AWS
+                  Academy Graduate)</p>
+              </div>
+              <div class="workeduc-content">
+                <p>CCNA: Introduction to Networks.
+                  (Cisco)</p>
+              </div>
+            </div>
+            <span class="number-page">4</span>
+            <span class="nextprev-btn back" data-page="turn-2"><i class="bx bx-chevron-left"></i></span>
+          </div>
+        </div>
+
+        <!-- Page 6 & 7 -->
+        <div class="book-page page-right turn" id="turn-3">
+          <!-- Page 6: Projects -->
+          <div class="page-front">
+            <h1 class="wrd-title">Projects</h1>
+            <div class="wrd-container">
+              <div class="wrd-card">
+
+                <h3 class="wrd-role">1. Gym Management System for Leo Fitness</h3>
+                <span class="wrd-year"><i class="bx bx-code"></i> ASP.NET, Selenium, MySQL</span>
+                <p class="wrd-desc">Streamlined gym processes, billing, booking, user flow. Developed a Gym Management
+                  for Leo Fitness using ASP.NET to streamline member registration, scheduling, and billing processes.
+                  Integrated front-end and back-end functionalities to provide an intuitive user interface and efficient
+                  data management for gym operations. Automated gym booking system and member management features,
+                  improving overall efficiency and user satisfaction.</p>
+              </div>
+              <div class="wrd-card">
+
+                <h3 class="wrd-role">2. Dental Hospital Web Application (Sai Hospital)</h3>
+                <span class="wrd-year"><i class="bx bx-code"></i> ReactJS, HTML, CSS, JS, MySQL</span>
+                <p class="wrd-desc">Multi-scene UI with price calculator and patient flow. Developed user-friendly UI
+                  and backend logic for patient registration, appointments, and billing using ReactJS and MySQL.</p>
+              </div>
+              <div class="wrd-card">
+
+                <h3 class="wrd-role">3. Online Student Attendance Management System</h3>
+                <span class="wrd-year" style="color: green;"><i class="bx bx-code"></i> PHP, JS, HTML, CSS, MySQL</span>
+                <p class="wrd-desc">Real-time tracking, analytics, secure data logging. Developed an Online Student
+                  Attendance Management System using PHP, HTML, CSS, JavaScript, and MySQL to automate and simplify the
+                  attendance tracking process. Implemented features for real-time attendance marking, reporting, and
+                  data visualization to enhance administrative efficiency. Integrated MySQL database for secure data
+                  storage and retrieval, enabling easy access to attendance records and analytics. The system provides a
+                  seamless and efficient way to manage student attendance, ensuring accurate and timely data for further
+                  analysis and decision-making.</p>
+              </div>
+            </div>
+            <span class="number-page">5</span>
+            <span class="nextprev-btn" data-page="turn-3"><i class="bx bx-chevron-right"></i></span>
+          </div>
+
+          <!-- Page 7: Contact Form -->
+          <div class="page-back" id="contact">
+            <div class="contact-box">
+              <h1 class="title">Contact Me!</h1>
+              <form id="contact-form">
+                <input type="text" name="name" class="field" placeholder="Your Name" required />
+                <input type="email" name="email" class="field" placeholder="Your Email" required />
+                <input type="text" name="phone" class="field" placeholder="Your Mobile Number" required />
+                <textarea name="message" class="field" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+              </form>
+
+              
+<!-- Custom Popup -->
+<div id="error-popup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+  background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center;">
+  <div style="background:#fff; padding:20px; border-radius:10px; max-width:400px; text-align:center;">
+    <h3>❌ Failed to send</h3>
+    <p>There was a technical error. Please contact me via:</p>
+    <p>
+      📧 <a href="mailto:dandwateakshay77@gmail.com">dandwateakshay77@gmail.com</a><br>
+      💼 <a href="https://www.linkedin.com/in/akshay-dandvate77" target="_blank">LinkedIn Profile</a>
+    </p>
+    <button onclick="document.getElementById('error-popup').style.display='none'">Close</button>
+  </div>
+</div>
+
+
+
+              <span class="number-page">6</span>
+            </div>
+            <span class="nextprev-btn back" data-page="turn-3"><i class="bx bx-chevron-left"></i></span>
+            <span class="nextprev-btn" data-page="turn-4"><i class="bx bx-chevron-right"></i></span>
+
+            <!-- ✅ Home Button - Now inside contact page -->
+            <span class="homee-btn" data-page="turn-1">
+              <i class="bx bx-home"></i>
+            </span>
+          </div>
+
+        </div>
+        <!-- Thank You Page -->
+        <!-- Thank You Page -->
+        <div class="book-page page-right" id="turn-4">
+          <div class="thank-you-card">
+            <div class="thank-you-box">
+              <h2>🙏 Thank You for Visiting!</h2>
+              <p>
+                Thank you for taking the time to explore my portfolio. I hope
+                you enjoyed learning about my work and skills.
+                If you have any questions or opportunities, feel free to reach
+                out & also fill this contact form below. I'll get back to you
+                as soon as possible!
+              </p>
+              <p>.....Best Regards, <br> Akshay Dandwate</p>
+
+              <!-- Typing effect text will come here -->
+              <div id="typing-text" class="thank-you-text"></div>
+
+              <div class="thank-you-icons">
+                <a href="https://www.linkedin.com/in/akshay-dandvate77" target="_blank" class="thank-you-icon">
+                  <i class="bx bxl-linkedin-square"></i>
+                </a>
+                <a href="mailto:dandwateakshay77@gmail.com" class="thank-you-icon">
+                  <i class="bx bx-envelope"></i>
+                </a>
+              </div>
+            </div>
+
+            <!-- Bubble effect -->
+            <!-- <div class="bubble-container">
+              <div class="bubble"></div>
+              <div class="bubble"></div>
+              <div class="bubble"></div>
+              <div class="bubble"></div>
+              <div class="bubble"></div>
+              <div class="bubble"></div>
+              <div class="bubble"></div>
+              <div class="bubble"></div>
+              <div class="bubble"></div>
+              <div class="bubble"></div>
+            </div> -->
+          </div>
+          <!-- <span class="nextprev-btn back" data-page="turn-4"><i class="bx bx-chevron-left"></i></span> -->
+        </div>
+
+        <!-- Global Bubble Effect -->
+        <!-- <div class="bubble-container">
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+        </div> -->
+
+        <!-- Typing Effect Script -->
+        
+ <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+        
+        <script src="script.js"></script>
+
+       
+</body>
+
+</html>
+
+</html>
