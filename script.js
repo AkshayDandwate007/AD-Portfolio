@@ -389,7 +389,7 @@ document.querySelectorAll('.card').forEach(card => observer.observe(card));
             setTimeout(() => {
               preloader.style.display = 'none';
               mainContent.style.display = 'block';
-            }, 5000); // Increased to 5 seconds for slower loading
+            }, 3000); // Increased to 5 seconds for slower loading
           });
         
 
