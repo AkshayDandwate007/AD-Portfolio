@@ -480,4 +480,10 @@ document.querySelectorAll('.card').forEach(card => observer.observe(card));
               }, 200);
             }, 600);
           }
-     
+    //  rested key copy the code 
+    document.addEventListener('keydown', function(e){
+    if(e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S' || e.key === 'c' || e.key === 'C' || e.key === 'i' || e.key === 'I')){
+        e.preventDefault();
+        alert("This action is disabled!");
+    }
+});

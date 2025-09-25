@@ -1788,3 +1788,10 @@ iframe {
     background: #00d6ff;
   }
 }
+/* rested key and all */
+body {
+    -webkit-user-select: none;  /* Chrome/Safari */
+    -moz-user-select: none;     /* Firefox */
+    -ms-user-select: none;      /* IE10+ */
+    user-select: none;          /* Standard */
+}
