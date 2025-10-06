@@ -8,195 +8,34 @@
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <!-- style -->
   <link rel="stylesheet" href="style.css" />
-<style>
-  
-  /* ================= Preloader Styles ================= */
-#preloader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #01010f, #000000, #01040e);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  overflow: hidden;
-}
 
-/* ================= Profile Container ================= */
-.brain-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 1rem;
-  width: 100%;
-  height: 100vh;
-  padding: 1rem;
-  box-sizing: border-box;
-  position: relative;
-}
 
-/* ================= Profile Image ================= */
-.profile-img {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center 20%;
-  border: 4px solid #00abf0;
-  box-shadow: 0 0 15px 5px rgba(0, 123, 255, 0.7);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-}
-
-/* ================= Loading Text ================= */
-.loading-text {
-  margin-top: 1rem;
-  font-size: 1.4rem;
-  font-weight: 600;
-  line-height: 1.4;
-  max-width: 90%;
-  background: linear-gradient(90deg, #db6e5e, #87c2f2, #6d95de, #be5d52);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: gradientShift 2s ease-in-out infinite, fadeIn 1s infinite alternate;
-}
-
-.loading-text b {
-  display: block;
-  font-size: 1.2em;
-}
-
-.loading-text span {
-  display: block;
-  font-size: 1rem;
-}
-
-@keyframes fadeIn {
-  0% { opacity: 0.5; }
-  100% { opacity: 1; }
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* ================= Progress Bar ================= */
-.progress-bar {
-  margin-top: 1.2rem;
-  width: 80%;
-  max-width: 400px;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, #1e5096, #2f6ea2, #6d95de, #be5d52);
-  border-radius: 6px;
-  animation: loadFill 5.2s forwards;
-}
-
-@keyframes loadFill {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-/* ================= Bubble Effects ================= */
-.bubble-container-preloader {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 1;
-}
-
-.bubble-preloader {
-  position: absolute;
-  bottom: -50px;
-  border-radius: 50%;
-  opacity: 0.7;
-  animation: rise-preloader 6s infinite ease-in-out;
-}
-
-/* Random bubble sizes & colors */
-.bubble-preloader:nth-child(1) { left: 10%; width: 10px; height: 10px; background: rgba(255, 215, 0, 0.6); animation-duration: 5s; }
-.bubble-preloader:nth-child(2) { left: 25%; width: 14px; height: 14px; background: rgba(77, 182, 172, 0.6); animation-duration: 7s; }
-.bubble-preloader:nth-child(3) { left: 40%; width: 8px;  height: 8px;  background: rgba(255, 111, 97, 0.6); animation-duration: 6s; }
-.bubble-preloader:nth-child(4) { left: 60%; width: 12px; height: 12px; background: rgba(173, 216, 230, 0.6); animation-duration: 8s; }
-.bubble-preloader:nth-child(5) { left: 80%; width: 14px; height: 14px; background: rgba(255, 255, 255, 0.5); animation-duration: 5.5s; }
-/* Add more as needed */
-
-@keyframes rise-preloader {
-  0%   { transform: translateY(0) scale(0.5); opacity: 0; }
-  10%  { opacity: 0.4; }
-  50%  { opacity: 0.6; }
-  100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
-}
-
-/* ================= Responsive ================= */
-@media (max-width: 768px) {
-  .profile-img {
-    width: 120px;
-    height: 120px;
-  }
-
-  .loading-text {
-    font-size: 1.1rem;
-  }
-
-  .progress-bar {
-    width: 90%;
-    height: 6px;
-  }
-}
-
-@media (max-width: 480px) {
-  .profile-img {
-    width: 100px;
-    height: 100px;
-  }
-
-  .loading-text {
-    font-size: 1rem;
-  }
-
-  .progress-bar {
-    width: 85%;
-    height: 5px;
-  }
-}
-</style>
 
 </head>
 
 <body>
 
+
+
+
+
+
+
+
+
+
+
+
   <!-- this is a restricted cammand  -->
 <body oncontextmenu="return false"> 
+
 
   <!-- Preloader -->
   <div id="preloader">
     <div class="brain-container">
       <img src="./122.jpg" alt="Akshay Dandwate Profile Photo" class="profile-img"
         style="object-position: center 20%;" />
-      <div class="loading-text"><b>Hi, I’m Akshay 🌐 – Let’s Explore My Portfolio!
+      <div class="loading-text"><b>"Hi, I’m Akshay 🌐 – Explore My Work & Ask Questions to My AI Bot!"💡
         </b></div>
       <div class="progress-bar">
         <div class="progress-fill"></div>
@@ -220,6 +59,51 @@
 
   <!-- Main Content -->
   <div id="main-content" style="display: none;">
+    <!-- Header / Portfolio Placeholder -->
+  <!-- <header>
+    <h1>Akshay Dandwate Portfolio</h1>
+    <p>Welcome! Explore my projects and skills.</p>
+  </header> -->
+
+  <!-- AI Agent Helper -->
+  <!-- AI Helper Full Body -->
+<!-- === Chatbot HTML === -->
+  <div class="ai-helper" aria-hidden="false">
+    <div class="ai-bot" id="aiBot" title="Chat with Akshay's Bot">
+      <div class="ai-head">
+        <div class="ai-antenna"></div>
+        <div class="ai-face">
+          <div class="ai-eyes">
+            <div class="eye"></div>
+            <div class="eye"></div>
+          </div>
+        </div>
+        <div class="ai-speech">Hi!</div>
+      </div>
+    </div>
+
+    <!-- Chat panel (hidden by default) -->
+    <div class="ai-chat" id="aiChat" style="display:none;" role="dialog" aria-label="Chat with Akshay">
+      <div class="header">
+        <div class="dot" aria-hidden="true"></div>
+        <div class="title">Chat with Akshay</div>
+        <button class="close" id="chatClose" title="Close">✕</button>
+      </div>
+
+      <div class="ai-messages" id="messages">
+        <!-- messages appended here -->
+      </div>
+
+      <div class="ai-input">
+        <input id="userInput" placeholder="Ask about Akshay (skills, projects, education)..." />
+        <button id="sendBtn">Send</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
 
     <!-- ====== Intro Section ====== -->
     <div class="intro-section" id="intro">
@@ -229,6 +113,8 @@
       <!-- No spelling error found here -->
       <canvas id="network-bg"></canvas>
     </div>
+
+
 
     <!-- ====== Book Wrapper ====== -->
     <div class="wrapper" id="book-wrapper" style="display: none;">
@@ -263,7 +149,7 @@
             </p>
 
             <div class="btn-box">
-              <a href="Akshay_resume63.pdf" class="btn" download>Download
+              <a href="/resumepdf/AkshayDandvate.pdf" class="btn" download>Download
                 CV</a>
               <a href="#" class="btn contact-me">Contact Me!</a>
             </div>

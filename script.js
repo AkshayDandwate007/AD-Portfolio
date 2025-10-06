@@ -389,7 +389,7 @@ document.querySelectorAll('.card').forEach(card => observer.observe(card));
             setTimeout(() => {
               preloader.style.display = 'none';
               mainContent.style.display = 'block';
-            }, 3000); // Increased to 5 seconds for slower loading
+            }, 4000); // Increased to 5 seconds for slower loading
           });
         
 
@@ -480,6 +480,16 @@ document.querySelectorAll('.card').forEach(card => observer.observe(card));
               }, 200);
             }, 600);
           }
+
+          function showPortfolio() {
+            const intro = document.getElementById("intro");
+            const portfolioContent = document.getElementById("portfolio-content");
+            const wrapper = document.getElementById("book-wrapper");
+
+            intro.style.display = "none";
+            wrapper.style.display = "none";
+            portfolioContent.style.display = "block";
+          }
     //  rested key copy the code 
     document.addEventListener('keydown', function(e){
     if(e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S' || e.key === 'c' || e.key === 'C' || e.key === 'i' || e.key === 'I')){
@@ -487,3 +497,142 @@ document.querySelectorAll('.card').forEach(card => observer.observe(card));
         alert("This action is disabled!");
     }
 });
+
+
+
+
+
+
+
+const aiBot = document.getElementById("aiBot");
+const aiChat = document.getElementById("aiChat");
+const chatClose = document.getElementById("chatClose");
+const sendBtn = document.getElementById("sendBtn");
+const userInput = document.getElementById("userInput");
+const messagesEl = document.getElementById('messages');
+
+// Toggle chat on bot click
+aiBot.addEventListener('click', (e) => {
+  e.stopPropagation();
+  if (aiChat.style.display === 'none' || aiChat.style.display === '') {
+    aiChat.style.display = 'flex';
+    appendMessage("Hi — I'm Akshay's assistant! Ask me about skills, projects, education, experience, or type 'contact' to get email/LinkedIn/resume.", 'bot');
+  } else {
+    aiChat.style.display = 'none';
+  }
+});
+
+// Close chat on [✕]
+chatClose.addEventListener('click', () => {
+  aiChat.style.display = 'none';
+});
+
+// Optional: closes chat when clicking outside
+document.addEventListener('click', function(event) {
+  if (!aiBot.contains(event.target) && !aiChat.contains(event.target)) {
+    aiChat.style.display = 'none';
+  }
+});
+
+// Send message logic
+sendBtn.addEventListener('click', () => {
+  const text = userInput.value.trim();
+  if (!text) return;
+  userInput.value = '';
+  botRespond(text);
+});
+
+// Enter key support
+userInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    sendBtn.click();
+  }
+});
+
+// Append message to chat
+function appendMessage(text, who = 'bot', options = { html: false }) {
+  const div = document.createElement('div');
+  div.className = 'msg ' + (who === 'user' ? 'user' : 'bot');
+  if (options.html) div.innerHTML = text;
+  else div.textContent = text;
+  messagesEl.appendChild(div);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+// Bot response logic
+function botRespond(userText) {
+  appendMessage(userText, 'user');
+  const typing = document.createElement('div');
+  typing.className = 'msg bot';
+  typing.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+  messagesEl.appendChild(typing);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  setTimeout(() => {
+    typing.remove();
+    const q = userText.toLowerCase();
+
+    // Contact buttons
+    if(q.includes("contact") || q.includes("info")) {
+      const contactHtml = `
+        <div>Here is how you can reach Akshay:</div>
+        <div style="margin-top:8px;">
+          <a href="mailto:akshay.dandwate007@gmail.com" target="_blank" style="
+              display:inline-block;
+              margin:2px;
+              padding:5px 10px;
+              background-color:#4CAF50;
+              color:white;
+              text-decoration:none;
+              border-radius:5px;
+              font-size:14px;
+          ">Email</a>
+
+          <a href="www.linkedin.com/in/akshay-dandvate-446485291/" target="_blank" style="
+              display:inline-block;
+              margin:2px;
+              padding:5px 10px;
+              background-color:#0077B5;
+              color:white;
+              text-decoration:none;
+              border-radius:5px;
+              font-size:14px;
+          ">LinkedIn</a>
+
+          <a href="/resumepdf/AkshayDandvate.pdf" target="_blank" style="
+              display:inline-block;
+              margin:2px;
+              padding:5px 10px;
+              background-color:#f39c12;
+              color:white;
+              text-decoration:none;
+              border-radius:5px;
+              font-size:14px;
+          ">Download Resume</a>
+        </div>
+      `;
+      appendMessage(contactHtml, 'bot', { html: true });
+      return;
+    }
+
+    // Simple answer logic
+    let answer;
+    if(q.includes("skill")) 
+        answer = "Java, Spring Boot, ReactJS, MySQL, HTML, CSS, Docker, GitHub, AWS.";
+    else if(q.includes("project")) 
+        answer = "Gym Management (ASP.NET), Dental Hospital App (ReactJS/MySQL), Student Attendance Management (PHP/MySQL).";
+    else if(q.includes("education") || q.includes("college")) 
+        answer = "B.E. Computer Engineering, Guru Gobind Singh College, Nashik, 2020–2024.";
+    else if(q.includes("experience") || q.includes("intern")) 
+        answer = "Intern at Paarsh Infotech & OctaNet Software Services.";
+    else if(q.includes("certif") || q.includes("course") || q.includes("ccna") || q.includes("aws")) 
+        answer = "Java Full Stack, Cybersecurity Analyst, AWS ML Foundations, CCNA Intro to Networks.";
+    else if(q.includes("name")) 
+        answer = "Akshay Dandwate";
+    else 
+        answer = "I'm Akshay's bot. You can ask about my skills, projects, education, experience, or type 'contact' to see Email/ LinkedIn/ Resume Link.";
+
+    appendMessage(answer, 'bot', { html: true });
+  }, 900);
+}
