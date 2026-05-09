@@ -636,3 +636,49 @@ function botRespond(userText) {
     appendMessage(answer, 'bot', { html: true });
   }, 900);
 }
+function calcDuration(startStr, endStr) {
+  const start = new Date(startStr);
+  const end   = endStr === 'present' ? new Date() : new Date(endStr);
+  let y = end.getFullYear() - start.getFullYear();
+  let m = end.getMonth()    - start.getMonth();
+  let d = end.getDate()     - start.getDate();
+  if (d < 0) { m--; d += new Date(end.getFullYear(), end.getMonth(), 0).getDate(); }
+  if (m < 0) { y--; m += 12; }
+  return { y, m, d };
+}
+
+function formatDur(y, m, d) {
+  let s = '';
+  if (y > 0) s += y + ' yr ';
+  if (m > 0) s += m + ' mo ';
+  if (!y && !m) s += d + ' days';
+  return s.trim();
+}
+
+function updateAllDurations() {
+  let totalDays = 0;
+  document.querySelectorAll('.wrd-year[data-start]').forEach(function(el) {
+    const startStr = el.getAttribute('data-start');
+    const endStr   = el.getAttribute('data-end');
+    const { y, m, d } = calcDuration(startStr, endStr);
+    const start = new Date(startStr);
+    const end   = endStr === 'present' ? new Date() : new Date(endStr);
+    totalDays  += Math.floor((end - start) / (1000 * 60 * 60 * 24));
+    let badge = el.querySelector('.dur-badge');
+    if (!badge) {
+      badge = document.createElement('span');
+      badge.className = 'dur-badge exp-timer-badge';
+      badge.style.marginLeft = '6px';
+      el.appendChild(badge);
+    }
+    badge.textContent = formatDur(y, m, d);
+  });
+  const totalY = Math.floor(totalDays / 365);
+  const totalM = Math.floor((totalDays % 365) / 30);
+  const totalD = totalDays % 30;
+  const totalEl = document.getElementById('exp-total-value');
+  if (totalEl) totalEl.textContent = formatDur(totalY, totalM, totalD);
+}
+
+updateAllDurations();
+setInterval(updateAllDurations, 60000);

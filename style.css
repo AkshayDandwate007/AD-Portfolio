@@ -438,6 +438,8 @@ body {
 
 .book-page .page-front {
   transform: rotateY(0deg) translateZ(1px);
+  display: flex;
+  flex-direction: column;
 }
 
 .book-page .page-back {
@@ -1122,6 +1124,54 @@ body {
 .company-name {
   color: #28a745;
 }
+
+.exp-total-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0 8px 0;
+  padding: 7px 14px;
+  background: linear-gradient(135deg, #00abf0, #006e9a);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  box-shadow: 0 3px 10px rgba(0,171,240,0.3);
+}
+
+.exp-total-box i {
+  font-size: 1rem;
+}
+
+.wrd-card {
+  border-left: 3px solid #00abf0;
+}
+
+.wrd-title,
+.wrd-year,
+.wrd-role {
+  color: #006e9a;
+}
+
+.wrd-year {
+  color: #00abf0;
+}
+
+.wrd-role {
+  color: #074a7f;
+}
+
+.wrd-desc {
+  color: #111;
+}
+
+.wrd-container {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: calc(100% - 5rem);
+  margin-top: 1rem;
+}
+
 
 
 /* home icon 6 page  */
